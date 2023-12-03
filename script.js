@@ -10,34 +10,110 @@
 //
 
 // Constants
-const appID = "app";
-const headingText = "To do. To done. ✅";
+const inputBox = document.getElementById("input-box");
+const listContainer = document.getElementById("list-container");
 
-// DOM Elements
+
+//
 let appContainer = document.getElementById(appID);
 
-//
-// Functions
-//
 
-// Add a heading to the app container
+// Functions
+formSubmit.addEventListener("submit", add_todo);
+
 function inititialise() {
-  // If anything is wrong with the app container then end
+  
   if (!appContainer) {
     console.error("Error: Could not find app contianer");
     return;
   }
 
-  // Create an h1 and add it to our app
-  const h1 = document.createElement("h1");
+  const h2 = document.createElement("h2");
   h1.innerText = headingText;
-  appContainer.appendChild(h1);
+  appContainer.appendChild(h2);
+  
 
   // Init complete
-  console.log("App successfully initialised");
+  console.log("Successfully Addedd");
+
 }
 
-//
-// Inits & Event Listeners
-//
-inititialise();
+function add_todo(event){
+  //event.preventDefault();
+  if(inputBox.value === ""){
+    alert("You must write something");
+  }
+  else {
+    let li = document.createElement("li");
+    li.innerHTML = inputBox.value;
+    li.setAttribute("id", "todo-box");
+    li.className = "unchecked";
+    listContainer.appendChild(li);
+
+
+    let this_button = document.createElement("button");
+    this_button.innerHTML = "\u00d7";
+    li.appendChild(this_button);
+  }
+  
+  inputBox.value = "";
+  
+}
+
+listContainer.addEventListener("click", removeTodo, false);
+
+function removeTodo(event){
+
+  if (event.target.tagName === "LI"){
+    event.target.classList.toggle("checked");
+  }
+
+ 
+  else if (event.target.tagName === "SPAN"){
+
+    let exitingItems = event.target.parentElement;
+    event.target.parentElement.remove();
+   
+  }
+  
+}
+
+inputBox.addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    add_todo();
+  }
+});
+
+const formSubmit = document.querySelector(".row");
+
+btn_clear.addEventListener("click", clear_all, false);
+
+function clear_all(){
+  listContainer.innerHTML = "";
+  
+}
+
+function countTodo(){
+  const toTalTodo = listContainer.children.length;
+  const checkedTodos = document.querySelectorAll(".checked").length;
+
+  const todoCount = document.getElementById("todo-count");
+  const doneCount = document.getElementById("done-count")
+
+  todoCount.innerHTML = toTalTodo;
+  doneCount.innerHTML = checkedTodos;
+}
+
+countTodo();
+
+
+function saveData(){
+  localStorage.setItem("data", listContainer.innerHTML);
+}
+
+function showTask(){
+  listContainer.innerHTML = localStorage.getItem("data");
+  countTodo();
+}
+
+showSaved();

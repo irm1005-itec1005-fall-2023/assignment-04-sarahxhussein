@@ -7,6 +7,13 @@
 /*
  VARIABLES
 */
+*{ 
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+
 :root {
   /* Core colours */
   /* https://coolors.co/palette/e63946-f1faee-a8dadc-457b9d-1d3557 */
@@ -31,15 +38,127 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   color: var(--body-default-colour);
   background-color: var(--body-background-colour);
-}
-
-main {
   min-height: 100vh;
 
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 10px;
+}
+
+.todo-app {
+  width: 100%;
+  max-width: 540px;
+  background:#a8dadc;
+  margin: 100px auto 20px;
+  padding: 40px 30px 70px;
+  border-radius: 10px;
+}
+
+.todo-app h2 {
+  color:aliceblue;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.todo-app h2 img {
+  width: 100px;
+  margin-left: 10px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #e8dfe5;
+  border-radius: 60px;
+  padding-left: 20px;
+  margin-bottom: 35px;
+
+}
+
+input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 10px;
+
+}
+
+button {
+  border: none;
+  outline: none;
+  padding: 16px 20px;
+  background: #e8dfe5;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 30px;
+}
+
+ul li {
+  list-style: none;
+  font-size: 17px;
+  padding: 12px 8px 12px 50px;
+  user-select: none;
+  cursor: pointer;
+  position: relative;
+}
+
+ul li::before {
+  content: '';
+  position: absolute;
+  height: 28px;
+  width: 28px;
+  border-radius: 50px;
+  background-image: url(/images/star.jpg);
+  background-size: cover;
+  background-position: center;
+  top: 10px;
+  left: 8px;
+}
+
+ul li.checked {
+
+  color: #013524;
+  text-decoration: line-through;
+
+}
+
+ul li.ckecked::before {
+
+  background-image: url(/images/checked.png);
+
+}
+
+ul li span {
+
+  position: absolute;
+  right: 0;
+  top: 5px;
+  width: 40px;
+  height: 40px;
+  font-size: 22px;
+  color: #1d3557;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 50px;
+
+}
+
+ul li span:hover {
+
+  background: rgb(178, 166, 178);
+
+}
+
+
 
 
 /****** Screen reader text utility clsas *******/
